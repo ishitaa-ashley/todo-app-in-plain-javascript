@@ -41,7 +41,7 @@
 	 var donelist = JSON.parse(localStorage.getItem("donekey")); 
 
 
-
+	 var numberdel=donelist.length;
 
 	 function addlist()
 	 {
@@ -91,7 +91,7 @@
 	 	
 	 	//newlist.appendChild(box);
 	 	//box.onclick=del();
-	 	
+	 	var numberdel=donelist.length;
 	 	var number=storedlist.length;
 	 	var task=newadd;
 	 	var newcontent=document.createTextNode(task);
@@ -146,10 +146,11 @@
 	 	
 	 	var task=donelist[i];
 	 	var newcontent=document.createTextNode(task);
+	 	newlist.innerHTML = '<input type="checkbox" id="checkdel'+numberdel+'" name="checkdel' + numberdel + '" value= "'+task+'" onclick="remove(event)"><label for="checkdel' + numberdel + '">'+ task +'</label>';
 	 	
 	 	//document.getElementById("check").value=task; 
 	 	
-	 	newlist.appendChild(newcontent);
+	 	//newlist.appendChild(newcontent);
 	 	
 	 	var display=document.getElementById("done");
 	 	display.appendChild(newlist);
@@ -178,7 +179,7 @@
     //alert(id.parentNode);
     //document.getElementById(id).classList.add('nodisp');
     valnew2=valnew.trim();
-    donearray.push(valnew);
+    donearray.push(valnew2);
     localStorage.setItem("donekey", JSON.stringify(donearray));
    console.log(donearray);
     var check='task 3';
@@ -203,7 +204,7 @@
     	valnew2=valnew;
     	var val=valnew.trim();
     	//alert(val);
-    donelist.push(valnew);
+    donelist.push(val);
     localStorage.setItem("donekey", JSON.stringify(donelist));
    console.log(donelist);
     var ind = storedlist.indexOf(val);
@@ -213,6 +214,20 @@
 	displaydone();
 	location.reload();	
     }
+}
+
+function remove(e)
+{
+
+	var removeword=e.target.value;
+	var word=removeword.trim();
+	console.log(word);
+	var index=donelist.indexOf(word);
+	donelist.splice(index,1);
+	localStorage.setItem("donekey", JSON.stringify(donelist));
+	console.log(index);
+	location.reload();
+
 }
 
    function displaydone()
@@ -226,9 +241,10 @@
 	 	var task=valnew2;
 	 	var newcontent=document.createTextNode(task);
 	 	
-	 	//document.getElementById("check").value=task; 
+	 	//document.getElementById("check").value=task;
+	 	newlist.innerHTML = '<input type="checkbox" id="checkdel'+numberdel+'" name="checkdel' + numberdel + '" value= "'+task+'" onclick="remove(event)"><label for="checkdel' + numberdel + '">'+ task +'</label>'; 
 	 	
-	 	newlist.appendChild(newcontent);
+	 	//newlist.appendChild(newcontent);
 	 	
 	 	var display=document.getElementById("done");
 	 	display.appendChild(newlist);
