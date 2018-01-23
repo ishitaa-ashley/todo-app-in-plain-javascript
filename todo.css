@@ -29,6 +29,10 @@ button
 	background-color: #848D95;
 	color:white;
 }
+button:hover
+{
+	cursor: pointer;
+}
 h2, h3
 {
 	margin-left: 5%;
