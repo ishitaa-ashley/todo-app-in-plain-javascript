@@ -1,0 +1,59 @@
+#top
+{
+	position: fixed;
+	float: top;
+	height: 10%;
+	width:100%;
+	background-color: #4285F4;
+	color: white;
+	
+}
+html,body {
+    margin:0;
+    padding:0;
+}
+.nodisp
+{
+	display: none;
+}
+.del
+{
+	margin-left: 10%;
+}
+h2, h3
+{
+	margin-left: 5%;
+	
+}
+input[type="text"]
+{
+	margin-left: 10%;
+}
+h3
+{
+	border-bottom: 2px solid #858C93;
+	padding-bottom: 3px;
+	color: #858C93;
+}
+div div
+{
+	height: 500px;
+	width:300px;
+	background-color: #EFF0F1;
+	margin-top: 10%;
+	margin-left: 5%;
+	display: inline-table;
+	border-radius: 10px;
+	position: relative;
+	
+}
+li
+{
+	border:1px solid #858C93;
+	border-radius: 5px;
+	height: 20px;
+	margin:0px 5px 5px 5px;
+	margin-left: 0px;
+	list-style:none;
+	padding:10px;
+}

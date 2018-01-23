@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO APP</title>
+	<link rel="stylesheet" type="text/css" href="todo.css">
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<header id="top">
+	<h2>TODO APP</h2>
+</header>
+<div class="main-div">
+<div class="left">
+	<h3>Doing</h3>
+	<input type="text" name="add" placeholder="Add Task"><button onclick="addlist()">ADD</button>
+	<ul id="doing"></ul>
+	<button class="del" onclick="search()">RENAME TASK</button>
+
+</div>
+<div class="right">
+	<h3>Done</h3>
+	<ul id="done"></ul>
+
+</div>
+</div>
+
+
+<script>
+
+	window.onload=displaydoing;
+	//window.onload=displaydone;
+	 var doinglist=[];
+	 var done={};
+	 var x=0;
+	 var storedlist=[];
+	 var storedlist = JSON.parse(localStorage.getItem("doingkey"));
+	 var donearray=[];
+	 var donelist = JSON.parse(localStorage.getItem("donekey")); 
+
+
+
+
+	 function addlist()
+	 {
+
+
+	 	if(storedlist==null)
+	 	{
+	 		var newadd=document.getElementsByName("add")[0].value;
+	 	doinglist.push(newadd);
+
+	 	localStorage.setItem("doingkey", JSON.stringify(doinglist));
+	 	console.log(doinglist);
+
+	 	var newlist=document.createElement("li");
+	 	newlist.classList.add("edit");
+	 	
+	 	//var box=document.createElement("input");
+	 	//box.type='checkbox';
+	 	
+	 	//newlist.appendChild(box);
+	 	//box.onclick=del();
+	 	
+	 	var number=0;
+	 	var task=newadd;
+	 	var newcontent=document.createTextNode(task);
+	 	newlist.innerHTML = '<input type="checkbox" id="check'+number+'" name="check' + number + '" onclick="del()" value= "'+task+'"><label for="check' + number + '">'+ task +'</label>'; 
+	 	
+	 	//newlist.appendChild(newcontent);
+	 	
+	 	var display=document.getElementById("doing");
+	 	display.appendChild(newlist);
+	 	}
+
+	 	else
+	 	{
+	 	var newadd=document.getElementsByName("add")[0].value;
+	 	storedlist.push(newadd);
+
+	 	localStorage.setItem("doingkey", JSON.stringify(storedlist));
+	 	console.log(storedlist);
+
+	 	var newlist=document.createElement("li");
+	 	newlist.classList.add("edit");
+	 	
+	 	//var box=document.createElement("input");
+	 	//box.type='checkbox';
+	 	
+	 	//newlist.appendChild(box);
+	 	//box.onclick=del();
+	 	
+	 	var number=storedlist.length;
+	 	var task=newadd;
+	 	var newcontent=document.createTextNode(task);
+	 	newlist.innerHTML = '<input type="checkbox" id="check'+number+'" name="check' + number + '" onclick="del()" value= "'+task+'"><label for="check' + number + '">'+ task +'</label>'; 
+	 	
+	 	//newlist.appendChild(newcontent);
+	 	
+	 	var display=document.getElementById("doing");
+	 	display.appendChild(newlist);
+	 	
+	 	//newlist.insertAdjacentHTML('afterbegin', '<input type="checkbox" id="btn" name="click" style="font-size: 1.5em;" onclick="del()">&nbsp;');
+
+	 }
+	 }
+	 function displaydoing()
+	 {
+	 	//var storedlist = JSON.parse(localStorage.getItem("doingkey"));
+	 	
+	 	console.log(storedlist);
+	 	for(var i=0;i<storedlist.length;i++)
+	 {
+	 	var newlist=document.createElement("li");
+	 	newlist.classList.add("edit");
+	 	document.getElementsByClassName("li").contentEditable="true";
+	 	
+	 	//var box=document.createElement("input");
+	 	//box.type='checkbox';
+	 	
+	 	//newlist.appendChild(box);
+	 	//box.onclick=del();
+	 	
+	 	var task=storedlist[i];
+	 	var newcontent=document.createTextNode(task);
+	 	newlist.innerHTML = '<input type="checkbox" id="check'+i+'" name="check' + i + '"  onclick="del(event)" value= " ' +task +' "><label for="check' + i + '">'+ task +'</label>';
+	 	//document.getElementById("check").value=task; 
+	 	
+	 	//newlist.appendChild(newcontent);
+	 	
+	 	var display=document.getElementById("doing");
+	 	display.appendChild(newlist);
+	 }
+	
+	// var items = document.getElementsByTagName("li");
+	//for (var idx = 0; idx < items.length; idx++) {
+    //items[idx].insertAdjacentHTML('afterbegin', '<input type="checkbox" id="btn" name="click" style="font-size: 1.5em;" onclick="del()">&nbsp;');}
+
+    for(var i=0;i<donelist.length;i++)
+	 {
+	 	var newlist=document.createElement("li");
+	 	newlist.classList.add("edit");
+	 	
+	 	
+	 	var task=donelist[i];
+	 	var newcontent=document.createTextNode(task);
+	 	
+	 	//document.getElementById("check").value=task; 
+	 	
+	 	newlist.appendChild(newcontent);
+	 	
+	 	var display=document.getElementById("done");
+	 	display.appendChild(newlist);
+	 }
+
+	}
+	 
+	
+    
+    /*var delbutton=document.getElementById('check');
+    
+    delbutton.addEventListener('click' , function(){
+ 	alert(this.value);
+    });*/
+
+    var valnew2;
+
+
+     function del(e){
+    	
+    
+    if(donelist==null)
+    {
+    var valnew=e.target.value;
+    var id=e.target.value;
+    //alert(id.parentNode);
+    //document.getElementById(id).classList.add('nodisp');
+    valnew2=valnew.trim();
+    donearray.push(valnew);
+    localStorage.setItem("donekey", JSON.stringify(donearray));
+   console.log(donearray);
+    var check='task 3';
+    //alert(typeof val);
+    //alert(typeof check);
+    var ind = storedlist.indexOf(valnew2);
+	storedlist.splice(ind, 1);
+	localStorage.setItem("doingkey", JSON.stringify(storedlist));
+	console.log(ind);
+	console.log(storedlist);
+	displaydone();
+	location.reload();
+	
+    }
+
+    else
+    {
+    	var valnew= e.target.value;
+    	var id=e.target.id;
+    	//alert(id.parentNode);
+    	//document.getElementById(id).classList.add('nodisp');
+    	valnew2=valnew;
+    	var val=valnew.trim();
+    	//alert(val);
+    donelist.push(valnew);
+    localStorage.setItem("donekey", JSON.stringify(donelist));
+   console.log(donelist);
+    var ind = storedlist.indexOf(val);
+	storedlist.splice(ind, 1);
+	localStorage.setItem("doingkey", JSON.stringify(storedlist));
+	console.log(ind);
+	displaydone();
+	location.reload();	
+    }
+}
+
+   function displaydone()
+    {
+
+    	
+	 	var newlist=document.createElement("li");
+	 	
+	 	
+	 	
+	 	var task=valnew2;
+	 	var newcontent=document.createTextNode(task);
+	 	
+	 	//document.getElementById("check").value=task; 
+	 	
+	 	newlist.appendChild(newcontent);
+	 	
+	 	var display=document.getElementById("done");
+	 	display.appendChild(newlist);
+	 
+    }
+
+   function search()
+   {
+   	 var text1=prompt("enter the value to be changed");
+   	 var text2=prompt("enetr new value");
+   	 for(var i=0;i<storedlist.length;i++)
+   	 {
+   	 	if(storedlist[i]==text1)
+   	 		storedlist[i]=text2;
+   	 }
+   	 localStorage.setItem("doingkey", JSON.stringify(storedlist));
+   	 location.reload();
+   }
+
+
+
+
+</script>
+
+</body>
+</html>
