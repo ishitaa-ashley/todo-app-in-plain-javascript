@@ -19,6 +19,15 @@ html,body {
 .del
 {
 	margin-left: 10%;
+	height:30px;
+	border:none;
+	border-radius: 3px;
+	
+}
+button
+{
+	background-color: #848D95;
+	color:white;
 }
 h2, h3
 {
